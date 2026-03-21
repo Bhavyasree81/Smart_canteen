@@ -11,7 +11,7 @@ public class CanteenStatus {
     @Id
     private int id;
 
-    private boolean open;
+    private boolean isOpen;
 
     public int getId() {
         return id;
@@ -22,10 +22,10 @@ public class CanteenStatus {
     }
 
     public boolean isOpen() {
-        return open;
+        return isOpen;
     }
 
-    public void setOpen(boolean open) {
-        this.open = open;
+    public void setOpen(boolean isOpen) {
+        this.isOpen = isOpen;
     }
 }
