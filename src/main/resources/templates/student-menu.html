@@ -133,7 +133,7 @@ No food items available today.
 
 <div class="menu-card" th:each="item : ${menuItems}">
 
-<img th:src="@{'/images/' + ${item.image}}" alt="Food">
+<img th:src="${item.image}" alt="Food">
 
 
 <h3 th:text="${item.foodName}">Food Name</h3>
