@@ -78,7 +78,6 @@ public class AuthController {
         String otp = otpService.generateOtp();
 
         emailService.sendOtp(email, otp);
-
         session.setAttribute("email", email);
         session.setAttribute("name", name);
 
@@ -92,12 +91,25 @@ public class AuthController {
     public String showVerifyOtpPage() {
         return "verify-otp";
     }
-    
+//    
+//    @PostMapping("/verify-otp")
+//    public String verifyOtp(@RequestParam String otp) {
+//        return "reset-password";
+//    }
     @PostMapping("/verify-otp")
-    public String verifyOtp(@RequestParam String otp) {
-        return "reset-password";
-    }
+    public String verifyOtp(@RequestParam String otp,
+                            HttpSession session) {
 
+        String storedOtp = (String) session.getAttribute("otp");
+
+        if(storedOtp != null && storedOtp.equals(otp)){
+            return "reset-password";
+        }
+
+        return "verify-otp"; // wrong OTP
+    }
+    
+    
     @PostMapping("/set-password")
     public String setPassword(@RequestParam String password,
                               @RequestParam String confirmPassword,

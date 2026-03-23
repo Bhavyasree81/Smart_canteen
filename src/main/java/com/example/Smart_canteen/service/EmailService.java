@@ -1,5 +1,3 @@
-
-
 package com.example.Smart_canteen.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
