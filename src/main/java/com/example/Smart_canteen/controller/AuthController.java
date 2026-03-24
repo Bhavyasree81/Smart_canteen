@@ -66,6 +66,13 @@ public class AuthController {
 
         return "login";
     }
+    
+ // ================= REGISTER PAGE =================
+
+    @GetMapping("/register")
+    public String showRegisterPage() {
+        return "register";
+    }
 
     // ================= SEND OTP =================
 
