@@ -11,7 +11,8 @@ import java.util.Map;
 @Service
 public class EmailService {
 
-    @Value("${API_KEY}")   // ✅ FIXED
+    // ✅ API KEY from Render environment variable
+    @Value("${BREVO_API_KEY}")
     private String apiKey;
 
     public void sendOtp(String email, String otp) {
@@ -21,37 +22,41 @@ public class EmailService {
 
             RestTemplate restTemplate = new RestTemplate();
 
+            // ✅ Headers
             HttpHeaders headers = new HttpHeaders();
             headers.setContentType(MediaType.APPLICATION_JSON);
             headers.set("api-key", apiKey);
 
+            // ✅ Request Body
             Map<String, Object> body = new HashMap<>();
 
-            // TO
+            // 🔹 TO (receiver)
             Map<String, String> to = new HashMap<>();
             to.put("email", email);
 
-            // FROM (MANDATORY)
+            // 🔹 FROM (🔥 VERY IMPORTANT - MUST BE VERIFIED IN BREVO)
             Map<String, String> from = new HashMap<>();
-            from.put("email", "yourverifiedemail@gmail.com"); // replace
+            from.put("email", "swathikottakota02@gmail.com"); // ⚠️ CHANGE THIS
 
             body.put("to", new Object[]{to});
-            body.put("from", from);  // ✅ FIXED
+            body.put("from", from); // ✅ FIX (this solves your error)
             body.put("subject", "OTP Verification - Smart Canteen");
             body.put("textContent", "Your OTP is: " + otp);
 
             HttpEntity<Map<String, Object>> request =
                     new HttpEntity<>(body, headers);
 
+            // ✅ Send request
             restTemplate.postForEntity(url, request, String.class);
 
             System.out.println("✅ Email sent successfully");
 
         } catch (Exception e) {
+
             System.out.println("❌ Email failed");
             e.printStackTrace();
 
-            // fallback
+            // fallback (so you can still test OTP)
             System.out.println("OTP (fallback): " + otp);
         }
     }
