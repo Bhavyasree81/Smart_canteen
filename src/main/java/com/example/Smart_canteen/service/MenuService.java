@@ -35,4 +35,9 @@ public class MenuService {
 	public void deleteMenuItem(Long id) {
 		menuRepository.deleteById(id);
 	}
+
+	// Update
+	public MenuItem updateMenuItem(MenuItem item) {
+		return menuRepository.save(item);
+	}
 }

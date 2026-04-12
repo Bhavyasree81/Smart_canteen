@@ -51,6 +51,23 @@ public class AdminMenuController {
         menuService.deleteMenuItem(id);
         return "redirect:/admin/menu/list";
     }
+
+    @GetMapping("/edit/{id}")
+    public String showEditMenuForm(@PathVariable Long id, Model model) {
+        MenuItem menuItem = menuRepository.findById(id).orElse(null);
+        if (menuItem != null) {
+            model.addAttribute("menuItem", menuItem);
+            return "edit-menu";
+        }
+        return "redirect:/admin/menu/list";
+    }
+
+    @PostMapping("/edit/{id}")
+    public String updateMenuItem(@PathVariable Long id, @ModelAttribute MenuItem menuItem) {
+        menuItem.setId(id);
+        menuService.updateMenuItem(menuItem);
+        return "redirect:/admin/menu/list";
+    }
     
     @PostMapping("/admin/menu/add")
     public String addMenu(MenuItem menuItem) {

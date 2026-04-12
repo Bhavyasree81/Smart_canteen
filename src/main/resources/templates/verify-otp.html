@@ -103,6 +103,11 @@ button:hover{
 
 <div class="otp-card">
 
+<!-- Error Message -->
+<div th:if="${error}" style="background:#f8d7da; border:1px solid #f5c6cb; color:#721c24; padding:12px; border-radius:6px; margin-bottom:20px;">
+    <strong>Error:</strong> <span th:text="${error}"></span>
+</div>
+
 <form action="/verify-otp" method="post">
 
 <div class="form-group">

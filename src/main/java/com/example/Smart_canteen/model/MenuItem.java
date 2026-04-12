@@ -15,13 +15,13 @@ public class MenuItem {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	
 	private Long id;
-	@Column(nullable = false)
+	@Column(name = "food_name", nullable = false)
 	private String foodName;
 	@Column(nullable = false)
 	private double price;
 	@Column(nullable = false)
 	private String category;
-	@Column(nullable = false)
+	@Column(name = "available", nullable = false)
 	private boolean Available;
 	
 	private String image;
@@ -40,6 +40,16 @@ public class MenuItem {
 		this.price = price;
 		this.category = category;
 		Available = available;
+	}
+
+	public MenuItem(Long id, String foodName, double price, String category, boolean available, String image) {
+		super();
+		this.id = id;
+		this.foodName = foodName;
+		this.price = price;
+		this.category = category;
+		Available = available;
+		this.image = image;
 	}
 
 	public Long getId() {
